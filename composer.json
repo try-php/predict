@@ -1,0 +1,21 @@
+{
+    "name": "try/predict",
+    "description": "Fluent, small and simple predictions",
+    "type": "library",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Felix Buchheim",
+            "email": "hanibal.dev@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "TryPhp\\": "./src"
+        }
+    }
+}

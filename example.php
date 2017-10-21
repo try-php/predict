@@ -7,14 +7,23 @@ class A {
     use \TryPhp\PredictionTrait;
 }
 $t = new A();
+try {
+    $t->predict([1, 2,3])
+        ->isArray()
+        ->hasItem('a') // not rly
+        ->withKey(1)
+        ->withKey(42) // dont think so
+        ->withoutKey(4)
+        ->countIsHigherThen(2)
+        ->countIsSmallerThen(4)
+        ->countIsEqual(3);
+} catch (\TryPhp\Exception\PredictionFailException $e) {
+    echo $e->getMessage() . PHP_EOL;
+    while($e->getPrevious() !== null) {
+        $e = $e->getPrevious();
+        echo $e->getMessage() . PHP_EOL;
+    }
+}
 
-$t->predict([1, 2,3])
-    ->isArray()
-    ->hasItem('a') // not rly
-    ->withKey(1)
-    ->withoutKey(4)
-    ->countIsHigherThen(2)
-    ->countIsSmallerThen(4)
-    ->countIsEqual(3);
 
 echo 'end' . PHP_EOL;

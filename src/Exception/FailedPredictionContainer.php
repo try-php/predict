@@ -32,7 +32,6 @@ class FailedPredictionContainer
             $this->injectPreviousException($exception, $this->failedPrediction);
         }
         $this->failedPrediction = $exception;
-
         return $this;
     }
 
@@ -64,6 +63,16 @@ class FailedPredictionContainer
         $property->setAccessible('false');
 
         return $current;
+    }
+
+    /**
+     * @throws PredictionFailException
+     */
+    public function __destruct()
+    {
+        if (isset($this->failedPrediction)) {
+            throw $this->failedPrediction;
+        }
     }
 
 }

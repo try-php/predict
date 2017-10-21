@@ -41,17 +41,6 @@ class Predictions
     }
 
     /**
-     * @throws Exception\PredictionFailException
-     */
-    public function __destruct()
-    {
-        $exception = $this->predictionFails->getFailedPrediction();
-        if (isset($exception)) {
-            throw $exception;
-        }
-    }
-
-    /**
      * @return ArrayPrediction
      */
     public function isArray()

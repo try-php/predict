@@ -171,7 +171,7 @@ class ArrayPrediction extends AbstractPrediction
     public function hasItem($item, bool $strict = true)
     {
         if (!in_array($item, $this->value, $strict)) {
-            $this->addFail('Expect array has value ' . $item . ' but it does not exist');
+            $this->addFail('Expect array has value "' . $item . '" but it does not exist');
         }
 
         return $this;

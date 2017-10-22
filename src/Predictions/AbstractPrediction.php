@@ -2,8 +2,8 @@
 
 namespace TryPhp\Predictions;
 
-use TryPhp\Exception\FailedPredictionContainer;
-use TryPhp\Exception\PredictionFailException;
+use TryPhp\Entity\FailedPrediction;
+use TryPhp\Entity\FailedPredictionContainer;
 
 /**
  * Abstract Predication
@@ -18,38 +18,42 @@ abstract class AbstractPrediction
      *
      * @var FailedPredictionContainer
      */
-    protected $predictionFails;
+    protected $failedPredictions;
 
     /**
      * Value to compare
      *
-     * @var array
+     * @var mixed
      */
     protected $value;
 
     /**
      * ArrayPrediction constructor.
      *
-     * @param array                     $value
+     * @param mixed                     $value
      * @param FailedPredictionContainer $predictionContainer
      */
     public function __construct($value, FailedPredictionContainer $predictionContainer)
     {
-        $this->value           = $value;
-        $this->predictionFails = $predictionContainer;
+        $this->value             = $value;
+        $this->failedPredictions = $predictionContainer;
     }
 
     /**
      * Add predictionFail to container
      *
-     * @param string $message
+     * @param string     $description
+     * @param mixed      $prediction
+     * @param mixed|null $actual
      *
-     * @return $this
+     * @return FailedPredictionContainer
      */
-    protected function addFail(string $message)
+    protected function addFail(string $description, $prediction, $actual = null)
     {
-        $this->predictionFails->add(new PredictionFailException($message));
+        $actual           = $actual ?? $this->value;
+        $failedPrediction = new FailedPrediction($description, $prediction, $actual);
+        $this->failedPredictions->add($failedPrediction);
 
-        return $this;
+        return $this->failedPredictions;
     }
 }

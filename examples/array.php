@@ -1,12 +1,11 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-// IDE autocomplete does not work with anonymously classes for some reason
-class A {
+$t = new class {
     use \TryPhp\PredictionTrait;
-}
-$t = new A();
+};
+
 try {
     $t->predict([1, 2,3])
         ->isArray()
@@ -16,7 +15,11 @@ try {
         ->withoutKey(4)
         ->countIsHigherThen(2)
         ->countIsSmallerThen(4)
-        ->countIsEqual(3);
+        ->countIsEqual(3)
+        ->hasItem(1)
+        ->hasItems([1,2])
+        ->hasSubset([1 => 2, 2=> 3])
+        ->hasSubset([0 => 2, 1 => 2, 2 => 3, 3 => 4]);
 } catch (\TryPhp\Exception\PredictionFailException $e) {
     echo $e->getMessage() . PHP_EOL;
     while($e->getPrevious() !== null) {

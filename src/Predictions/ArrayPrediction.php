@@ -135,7 +135,7 @@ class ArrayPrediction extends AbstractPrediction
      *
      * @return $this
      */
-    public function countIsHigherThen(int $expected)
+    public function countIsHigherThan(int $expected)
     {
         $count = count($this->value);
         if (count($this->value) <= $expected) {
@@ -152,7 +152,7 @@ class ArrayPrediction extends AbstractPrediction
      *
      * @return $this
      */
-    public function countIsSmallerThen(int $expected)
+    public function countIsLowerThan(int $expected)
     {
         $count = count($this->value);
         if (count($this->value) >= $expected) {

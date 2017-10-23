@@ -1,6 +1,6 @@
 {
     "name": "try/predict",
-    "description": "Fluent, small and simple predictions",
+    "description": "Fluent interface, small and simple predictions",
     "type": "library",
     "license": "GPL-2.0",
     "authors": [
